@@ -317,78 +317,98 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" ></script>
 
-  <script>
-    var map = L.map("mapid", {
-      zoomControl: false
-    }).setView(
-      [36.716533, -4.499746],
-      17
-    );
+   <script>
+      var map = L.map("mapid", {
+        zoomControl: false,
+      }).setView([36.71624732994904, -4.488628648337425], 15);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap"
-    }).addTo(map);
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        attribution:
+          "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/attributions'>CARTO</a>",
+      }).addTo(map);
 
-    var geom = {
-      type: "FeatureCollection",
-      features: [{
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              [-4.4996121525764465, 36.716920139226026],
-              [-4.50025051832199, 36.716758884827165],
-              [-4.5001620054244995, 36.71652452783071],
-              [-4.49952095746994, 36.716685782721505],
-              [-4.4996121525764465, 36.716920139226026]
-            ]
-          ]
-        }
-      }]
-    };
-	
-
-
-    function geomStyle(feature) {
-      return {
-        fillColor: "#ff6225",
-        fillOpacity: 0.2,
-        weight: 2,
-        opacity: 0.5,
-        color: "#ff6225"
+      var geomAdaByron = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "Polygon",
+              coordinates: [
+                [
+                  [-4.4996121525764465, 36.716920139226026],
+                  [-4.50025051832199, 36.716758884827165],
+                  [-4.5001620054244995, 36.71652452783071],
+                  [-4.49952095746994, 36.716685782721505],
+                  [-4.4996121525764465, 36.716920139226026],
+                ],
+              ],
+            },
+          },
+        ],
       };
-    }
 
-    L.geoJson(geom, {
-        style: geomStyle
+      var geomEtsi = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "Polygon",
+              coordinates: [
+                [
+                  [-4.478996797721891, 36.71582889736271],
+                  [-4.47930155803715, 36.714447068309084],
+                  [-4.476568238956588, 36.71414932288245],
+                  [-4.475215865054565, 36.71423330247843],
+                  [-4.475292055134389, 36.71454631652823],
+                  [-4.47535872145221, 36.71480588818707],
+                  [-4.475453959052032, 36.715218147254674],
+                  [-4.4755682441703755, 36.715500619783185],
+                  [-4.476063479682466, 36.71553879166672],
+                  [-4.476101574722406, 36.715699113371144],
+                  [-4.476282526159935, 36.71569147901178],
+                  [-4.476511096396706, 36.71565330720409],
+                  [-4.476568238956588, 36.71556932916033],
+                  [-4.476749190392809, 36.71552352291533],
+                  [-4.478996797721891, 36.71582889736271],
+                ],
+              ],
+            },
+          },
+        ],
+      };
+
+      function geomStyle(feature) {
+        return {
+          fillColor: "#0090ce",
+          fillOpacity: 0.2,
+          weight: 2,
+          opacity: 1.0,
+          color: "#0090ce",
+        };
+      }
+
+      L.geoJson(geomAdaByron, {
+        style: geomStyle,
       })
-      .bindTooltip("Ada Byron Research Center", {
-        permanent: true,
-        direction: "top"
+        .bindTooltip("Ada Byron Research Center", {
+          permanent: true,
+          direction: "top",
+        })
+        .addTo(map);
+
+      L.geoJson(geomEtsi, {
+        style: geomStyle,
       })
-      .addTo(map);
-	  
-	  
-	  
-	  
-	  
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      $("#tabs li").on("click", function () {
-        var tabNumber = $(this).data("tab");
-
-        $("#tabs li").removeClass("is-active");
-        $(this).addClass("is-active");
-
-        $("#tab-content div").removeClass("is-active");
-        $('div[data-content="' + tabNumber + '"]').addClass("is-active");
-      });
-    });
-  </script>
+        .bindTooltip("ETSI Informática", {
+          permanent: true,
+          direction: "top",
+        })
+        .addTo(map);
+    </script>
 </body>
 
 </html>
